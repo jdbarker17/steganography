@@ -59,7 +59,9 @@ def get_pixel_array(frame, encoded_word,start_x = 100,start_y = 100):
 
    
 
-
+# Function to decode a word
+# Inputs: Word length (uses existing function hence line 65, frame, start x and stary y)
+# Output: Decoded Word
 def decode_word(encoded_word_len,frame,start_x = 100,start_y = 100):
     word = "s" * encoded_word_len
     pixel_array = get_pixel_array(frame,word,start_x,start_y)

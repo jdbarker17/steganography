@@ -124,12 +124,29 @@ def encode_pixels(frame,modified_array,start_x = 100, start_y = 100):
     return frame
 
 
+def encode_obvious(frame,word,start_x = 100,start_y = 100):
+    incrementer = 0 
+    for i in range(0,len(word),3):
+        if i+1 > len(word):
+            i = 0 
+        if i+2 > len(word):
+            i = 0  
 
+        
+        (r,g,b) = ord(word[i]),ord(word[i+1]),ord(word[i+2])
+        #(r,g,b) = 255,0,0
+        pixel = (r,g,b)
+        frame[start_x, start_y + incrementer] = pixel
+        incrementer +=1 
+
+
+    
+    return frame
 
 def main():
 
     # Input Any Image
-    picture = Image.open("test.jpeg", 'r')
+    picture = Image.open("white.jpeg", 'r')
     encoded_picture = picture.copy()
     frame = encoded_picture.load()
     
@@ -141,12 +158,15 @@ def main():
     
     
     modified_array = modify_array(encoded_word,pixel_array)
-
-    
-    encoded_image = encode_pixels(frame,modified_array)
+    #encoded_image = encode_pixels(frame,modified_array)
     
     #Make sure extension is lossless (.png)
-    encoded_picture.save('encoded_image.png')
+    encoded_obvious = encode_obvious(frame,encoded_word)
+
+    print(f"Encoded start pixel = {frame[100,100]}")
+    
+    #encoded_picture.save('encoded_image.png')
+    encoded_picture.save('encoded_obvious2.png')
 
     
 
